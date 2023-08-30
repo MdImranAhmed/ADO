@@ -1,0 +1,24 @@
+string usernName = txtUsername.Text;
+            string pass = txtPassword.Text;
+
+            SqlConnection con = new SqlConnection(conStr);
+            string SqlQuery = "Select * FROM Employee WHERE EmpUserName=@EmpUserName and EmpPassword=@EmpPassword";
+            SqlCommand cmd = new SqlCommand(SqlQuery, con);
+            cmd.Parameters.AddWithValue("@EmpUserName", usernName);
+            cmd.Parameters.AddWithValue("@EmpPassword", pass);
+
+            con.Open();
+
+            DataTable dtUser = new DataTable();
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.HasRows == true)
+            {
+               con.Close();
+                recby = txtUsername.Text;
+          
+                MessageBox.Show("Login Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DashBoard objDashBoard = new DashBoard();
+                this.Hide();
+                objDashBoard.ShowDialog();
+            }

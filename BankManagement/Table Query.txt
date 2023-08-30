@@ -1,0 +1,40 @@
+create table AccountType(
+	AccountId int  primary key identity (1,1) not null,
+	AccountType varchar(35) not null
+)
+go
+CREATE table Employee(
+	EmployeeId int primary key identity(100,1) not null,
+	FullName varchar(30) not null,
+	EmpUserName varchar (20) not null,
+	EmpAddress varchar(100) not null,
+	EmpEmail varchar(30) not null,
+	EmpPassword varchar(30) not null,
+	ImagePath varchar(250) not null,
+	EmpNID varchar(100) not null,
+	EmpJoinDate Datetime Not null,
+	EmpIsActive bit not null,
+)
+go
+create table Gender(
+	GenderId int primary key identity(200,1) not null,
+	Gender varchar(30) not null,
+)
+Create table Customer(
+	CusAccountNo int  primary key identity (100000,1) not null,
+	CustFName varchar(20) not null,
+	CustLName varchar(20) not null,
+	CustFathersFName varchar(20) not null,
+	CustFathersLName varchar(20) not null,
+	CustDateofBirth Datetime Not null,
+	CustNID varchar(30) not null,
+	CustOccupation varchar(50) not null,
+	CustPhoneNo varchar (20) not null,
+	CustDepositAmount decimal(15,2) not null,
+	CustImagePath varchar(max) null,
+	CustGenderId int references Gender(GenderId) ON DELETE CASCADE ON UPDATE CASCADE,
+	EmployeeId int references Employee(EmployeeId) ON DELETE CASCADE ON UPDATE CASCADE,
+	CustAccountId int references AccountType(AccountId) ON DELETE CASCADE ON UPDATE CASCADE
+)
+	
+
